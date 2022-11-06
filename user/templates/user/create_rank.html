@@ -1,0 +1,29 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Create Rank
+{% endblock pageTitle %}
+
+{% block content %}
+    
+   <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <input type="submit" value="Create Rank" class="form-control"/>
+        </form>
+   </div>
+    
+{% endblock content %}
+{% block scripts %}
+<script>
+ var form_fields = document.getElementsByTagName('input')
+ console.log("Hello")
+ for (var field in form_fields){
+     form_fields[field].className += 'form-control'
+ }
+</script>
+{% endblock scripts %}

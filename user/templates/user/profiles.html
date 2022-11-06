@@ -1,0 +1,24 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Profile
+{% endblock pageTitle %}
+
+{% block content %}
+    <h1>User Profiles</h1>
+
+    {% for each_profile in all_profiles %}
+        <div>
+            <img class="full-rounded" src="{{ each_profile.image.url }}"/>
+            <h4>Name: <a href="{% url 'user-profile' each_profile.id %}">{{each_profile.name}}</a></h4>
+            <p>Intro: {{each_profile.intro}}</p>
+            <p>{{each_profile.bio|slice:"50"}}</p>
+            {% for rank in each_profile.comprank_set.all %}
+                <small>{{rank.game_name}} : {{rank.rank}}</small>
+            {% endfor %}
+        </div>
+        
+    {% endfor %}
+{% endblock content %}

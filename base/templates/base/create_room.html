@@ -1,0 +1,33 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Create Room
+{% endblock pageTitle %}
+
+{% block content %}
+<br>
+<br>
+<div class="container">
+ <form method="post" enctype='multipart/form-data'>
+         {% csrf_token %}
+         {% for field in form %}
+             <div class="mb-3">
+                 <label for="exampleInputEmail1" class="form-label">{{field.label}}</label>
+                 {{field}}
+             </div>
+         {% endfor %}
+         <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
+<div>
+{% endblock content %}
+{% block scripts %}
+<script>
+ var form_fields = document.getElementsByTagName('input')
+ console.log("Hello")
+ for (var field in form_fields){
+     form_fields[field].className += 'form-control'
+ }
+</script>
+{% endblock scripts %}

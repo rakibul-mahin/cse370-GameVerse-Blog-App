@@ -1,0 +1,70 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Room
+{% endblock pageTitle %}
+
+{% block content %}
+    <div class="container">
+        <div class="room-container">
+            <div>
+                <div class="card mb-3">
+                    <img src="{{room.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{room.title}}</h5>
+                      <p class="card-text">{{room.description}}</p>
+                      <p class="card-text"><small class="text-muted">{{room.updated | timesince}} ago</small></p>
+                    </div>
+                  </div>
+    
+                <div>
+                    <h3>Discussion</h3>
+                    <hr>
+                    {% for each_message in room_messages %}
+                        <div>
+                            {% comment %} <small>@{{each_message.user.username}} | {{each_message.created|timesince}} ago</small>
+                            {% if request.user.username == each_message.user.username or request.user.is_staff %}
+                                <a href="{% url 'delete-message' each_message.id %}">Delete</a>
+                            {% endif %} {% endcomment %}
+                            <hr>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p>@{{each_message.user.username}}: <h5>{{each_message.body}}</h5></p>
+                                    <small>{{each_message.created|timesince}} ago</small>
+                                    {% if request.user.username == each_message.user.username or request.user.is_staff %}
+                                        <a href="{% url 'delete-message' each_message.id %}">Delete</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                {% if request.user.is_authenticated %}
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <label for="exampleDataList" class="form-label">Type Your Message</label>
+                            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Message..." name="message-body">
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                <h3>Participants</h3>
+                <hr>
+                {% for each_participant in participants %}
+                    {% comment %} <div>
+                        <p>@{{each_participant.name}}</p>
+                    <div> {% endcomment %}
+                    <div>
+                        <a href="{% url 'user-profile' each_participant.id %}" class="list-group-item list-group-item-action">@{{each_participant.name}}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

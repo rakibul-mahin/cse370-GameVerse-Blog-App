@@ -1,0 +1,30 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Home
+{% endblock pageTitle %}
+
+{% block content %}
+    <div class="home-container">
+        <div>
+            {% include 'base/topic_component.html' %}
+        </div>
+        <div>
+            <!--<img src="{% static 'images/default_profile.jpg' %}"/>-->
+            <h3>Total Rooms Available: {{room_count}}</h3>
+            <hr>
+            <a class="btn btn-primary" href="{% url 'create-room' %}">Create Room</a>
+            <br>
+            <br>
+            <br>
+            {% include 'base/feed_component.html' %}
+        </div>
+        <div>
+            <h3>Recent Activity</h3>
+            <hr>
+            {% include 'base/activity_component.html' %}
+        </div>
+    </div>
+{% endblock content %}

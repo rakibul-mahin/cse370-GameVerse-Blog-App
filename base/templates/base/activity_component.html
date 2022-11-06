@@ -1,0 +1,29 @@
+{% for each_activity_message in activity_messages %}
+    {% comment %} <div>
+        {% if request.user.username == each_activity_message.user.username or request.user.is_staff %}
+            <a href="{% url 'delete-message' each_activity_message.id %}">Delete</a>
+        {% endif %}
+        <span><img class="rounded-circle" style="width: 50px; height: 50px" src="{{ each_activity_message.user.image.url }}"/></span>
+        <small>@{{each_activity_message.user.name}} {{each_activity_message.created | timesince}} ago</small>
+        <div>
+        <small>replied to "{{each_activity_message.room.title}}"</small>
+        </div>
+
+        <p>{{each_activity_message}}</p>
+    </div> {% endcomment %}
+
+    <div class="card text-white bg-dark mb-3" style="max-width: 19rem;">
+        
+        <div class="card-header">
+            <span><img class="rounded-circle" style="width: 70px; height: 70px" src="{{ each_activity_message.user.image.url }}"/></span>
+            <small><a href="{% url 'user-profile' each_activity_message.user.id %}">@{{each_activity_message.user.name}}</a>, {{each_activity_message.created | timesince}} ago</small>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">"<a href='{% url 'room' each_activity_message.room.id %}'>{{each_activity_message.room.title}}</a>"</h5>
+          <p class="card-text">{{each_activity_message}}</p>
+          {% if request.user.username == each_activity_message.user.username or request.user.is_staff %}
+            <a href="{% url 'delete-message' each_activity_message.id %}">Delete</a>
+          {% endif %}
+        </div>
+    </div>
+{% endfor %}

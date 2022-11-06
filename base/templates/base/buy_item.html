@@ -1,0 +1,20 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Delete Room
+{% endblock pageTitle %}
+
+{% block content %}
+    <div class="container">
+        <h1>Buy Item</h1>
+        <hr>
+        <p>Are you sure you want to Buy?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type='submit' value="Yes, Confirm" class="btn btn-danger"/>
+            <a href="{{request.META.HTTP_REFERER}}" class="btn btn-warning">Go Back</a>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,8 @@
+<h3>Browse Topic</h3>
+<hr>
+<div><a href="{% url 'home' %}" class="list-group-item list-group-item-action">All</a></div>
+{% for each_topic in all_topics %}
+    <div>
+        <a href="{% url 'home' %}?q={{each_topic.name}}" class="list-group-item list-group-item-action">{{each_topic.name}}</a>
+    </div>
+{% endfor %}

@@ -1,0 +1,40 @@
+{% extends 'boilerplate.html' %}
+
+{% block pageTitle %}
+    Login Page
+{% endblock pageTitle %}
+
+{% block content %}
+   {% comment %} <form method="post">
+        {% csrf_token %}
+        <input type='text' name='username' placeholder="Username" />
+        <input type='password' name='password' placeholder="Password" />
+
+        <input type="submit" value="Login"/>
+   </form>
+
+   <p>Create an Account <a href="{% url 'user-registration' %}"> Signup</a></p>
+   <p>Create an Admin Account <a href="{% url 'admin-registration' %}"> Create Admin Account</a></p> {% endcomment %}
+   <br>
+   <br>
+   <br>
+   <div class="container">
+    <h1>Login Page</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='username' placeholder="Username">
+          <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name='password' placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <hr>
+        <p>Create an Account <a href="{% url 'user-registration' %}"> Signup</a></p>
+        <p>Create an Admin Account <a href="{% url 'admin-registration' %}"> Create Admin Account</a></p>
+    </form>
+   </div>
+{% endblock content %}

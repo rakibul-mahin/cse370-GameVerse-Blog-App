@@ -1,0 +1,26 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Landing Page
+{% endblock pageTitle %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">GameVerse</h1>
+            <p class="lead">A place to share you Gaming Experience, with millions of Gamers</p>
+            <hr class="my-4">
+            <p>Get Started Now!!!</p>
+            <p class="lead">
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary btn-lg" href="{% url 'home' %}" role="button">Dashboard</a>
+                {% else %}
+                    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+{% endblock content %}

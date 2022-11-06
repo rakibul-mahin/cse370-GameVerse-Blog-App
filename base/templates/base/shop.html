@@ -1,0 +1,32 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    Shop
+{% endblock pageTitle %}
+
+{% block content %}
+    <div class="container">
+        <h1>Shop</h1>
+        <hr>
+        <a class="btn btn-primary" href="{% url 'post-item' %}">Post Item</a>
+        <hr>
+        {% for each_item in items %}
+            <hr>
+                <h3>Posted by: @{{each_item.creator}}</h3>
+                <small>Game Name: {{each_item.gamername}}</small>
+                <p>Details:</p>
+                <span>{{each_item.details}}</span>
+                <h5>Account Level: {{each_item.accountlevel}}
+                <h5>Sold To: {{each_item.buyer}}
+                <h5>Price: <b>{{each_item.price}}</b></h5>
+            
+            {% if each_item.sold is False %}
+                <a href="{% url 'buy' each_item.id %}" class="btn btn-primary"/>Buy</a>
+            {% endif %}
+
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock content %}

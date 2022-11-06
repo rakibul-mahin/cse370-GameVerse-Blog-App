@@ -1,0 +1,36 @@
+{% for each_room in all_rooms %}
+    {% comment %} <div>
+        <span><img class="rounded-circle" style="width: 95px; height: 95px" src="{{ each_room.host.image.url }}"/></span>
+        <span>Created by: <a href="{% url 'user-profile' each_room.host.id %}">@{{each_room.host.name}}</a> </span> 
+        <h3>Room Name:<a href='{% url 'room' each_room.id %}'> {{each_room.title}}</a></h3>
+        <small>{{each_room.topic.name}}</small>
+        <br>        
+        {% if request.user.username == each_room.host.username or request.user.is_staff %}
+            <a href="{% url 'update-room' each_room.id %}">Edit</a>
+            <a href="{% url 'delete-room' each_room.id %}">Delete</a>
+        {% endif %}
+        <hr>
+    </div> {% endcomment %}
+    
+    <div class="card mb-3" style="max-width: 850px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img style="width: 350px; height: 350px" src="{{each_room.image.url}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a href='{% url 'room' each_room.id %}'>{{each_room.title}}</a></h5>
+              <p class="card-text">Created by,<a href="{% url 'user-profile' each_room.host.id %}">@{{each_room.host.name}}</a></p>
+              <p class="card-text">{{each_room.description}}</p>
+              <p class="card-text"><small class="text-muted">Game: {{each_room.topic.name}}</small></p>
+              <p class="card-text"><small class="text-muted">Last Updated: {{each_room.updated | timesince}} ago</small></p>
+              <br>        
+                {% if request.user.username == each_room.host.username or request.user.is_staff %}
+                    <a href="{% url 'update-room' each_room.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete-room' each_room.id %}" class="btn btn-warning">Delete</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+{% endfor %}

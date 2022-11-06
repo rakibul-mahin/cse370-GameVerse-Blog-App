@@ -1,0 +1,54 @@
+{% extends 'boilerplate.html' %}
+
+{% load static %}
+
+{% block pageTitle %}
+    User Profile
+{% endblock pageTitle %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        {% if request.user.username == my_profile.username or request.user.is_staff %}
+            <a href="{% url 'edit-user-profile' my_profile.id %}" class="btn btn-primary">Edit Profile</a>
+            <hr>
+        {% endif %}
+    
+    <div class="profile-container">
+        <div class='col-sm'>
+                <img  class="full-rounded" src="{{ my_profile.image.url }}"/>
+                <h1>Name: {{my_profile.name}}</h1>
+                <p>{{my_profile.intro}}</p>
+                <p>{{my_profile.bio}}</p>
+                <h1>Social Links:</h1>
+                <p>{{my_profile.steam}}</p>
+                <p>{{my_profile.twitch}}</p>
+                <p>{{my_profile.discord}}</p>
+                <h1>Rank:</h1>
+                {% if request.user.username == my_profile.username or request.user.is_staff %}
+                    <a href='{% url 'add-rank' %}' class='btn btn-primary'>Add Rank</a>
+                {% endif %}
+                {% for rank in my_profile.comprank_set.all %}
+                    <div>
+                        <span class="badge badge-pill badge-danger">{{rank.game_name}} : {{rank.rank}}</span>
+                        {% if request.user.username == my_profile.username or request.user.is_staff %}
+                            <a href="{% url 'delete-rank' rank.id %}">Delete Rank</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+        </div>
+        <div class='col-sm'>
+            <h3>My Rooms</h3>
+            <hr>
+            {% include 'base/feed_component.html' %}
+        </div>
+        <div class='col-sm'>
+            <h3>My Messages</h3>
+            <hr>
+            {% include 'base/activity_component.html' %}
+        </div>
+        </div>
+    </div>
+    
+    
+{% endblock content %}

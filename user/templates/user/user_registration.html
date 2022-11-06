@@ -1,0 +1,43 @@
+{% extends 'boilerplate.html' %}
+
+{% block pageTitle %}
+    User Registration
+{% endblock pageTitle %}
+
+{% block content %}
+   {% comment %} <h1>User Registration</h1>
+   <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Register"/>
+   </form>
+
+   <p>Already Have an Account <a href="{% url 'login' %}"> Login</a></p> {% endcomment %}
+   <br>
+   <br>
+   <br>
+   <div class="container">
+    <h1>Registration Page</h1>
+    <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">{{field.label}}</label>
+                    {{field}}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <hr>
+            <p>Already Have an Account <a href="{% url 'login' %}"> Login</a></p>
+    </form>
+  <div>
+{% endblock content %}
+{% block scripts %}
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    console.log("Hello")
+    for (var field in form_fields){
+        form_fields[field].className += 'form-control'
+    }
+</script>
+{% endblock scripts %}
